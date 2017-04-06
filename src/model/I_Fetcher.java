@@ -6,6 +6,6 @@ import java.util.ArrayList;
 
 public interface I_Fetcher {
 	ArrayList<?> getAll();
-	Object getSingle();
+	Object getBySearch(String keyword);
 	Object toObject(ResultSet rs) throws SQLException;
 }
