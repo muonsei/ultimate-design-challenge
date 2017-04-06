@@ -41,7 +41,9 @@ private DBConnection connection;
 		
 		try {
 			ResultSet rs;
-			String query = "SELECT doctorName FROM schedule, doctor WHERE schedule.doctor_id = doctor.doctor_id";
+			String query = "SELECT schedule.day, schedule.time FROM schedule, doctor WHERE "
+					+ "schedule.doctor_id = doctor.doctor_id AND doctor.doctor_name LIKE "
+					+ doctorName;
 			
 			Statement stment = connection.getConnection().createStatement();
 			rs = stment.executeQuery(query);
