@@ -7,9 +7,9 @@ public class DBConnection {
 	private String	driverName	= "com.mysql.jdbc.Driver";// change
 	private String	url			= "jdbc:mysql://localhost:3306/";// change
 	/* Database is not in the machine */
-	private String	database	= "calendar";// change
+	private String	database	= "udc";// change
 	private String	username	= "root";// change
-	private String	password	= "root1234";// change
+	private String	password	= "1234";// change
 
 	public Connection getConnection() {
 		try {
