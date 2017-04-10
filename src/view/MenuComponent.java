@@ -227,7 +227,7 @@ public class MenuComponent implements ComponentMaker
 	private JButton calendarButton;
 	private JButton agendaButton;
 
-	private JLabel dateLabel;
+	public JLabel dateLabel;
 	private JLabel nameLabel;
 
 	private String month;

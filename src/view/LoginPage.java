@@ -26,6 +26,7 @@ public class LoginPage
 		setDButton();
 		setSButton();
 		setCButton();
+		setRButton();
 		setFirstName();
 		setLastName();
 		setLogo();
@@ -42,6 +43,7 @@ public class LoginPage
 		logPanel.add(firstName);
 		logPanel.add(lastName);
 		logPanel.add(logo);
+		logPanel.add(register);
 	}
 
 	public void setLogPanel()
@@ -54,7 +56,7 @@ public class LoginPage
 	public void setDButton()
 	{
 		doctor = new JButton(new ImageIcon("images/DoctorIcon.png"));
-		doctor.setBounds(200, 350, 150, 150);
+		doctor.setBounds(200, 270, 150, 150);
 		doctor.setBackground(darkBlue);
 		//doctor.setFont(font2);
 		doctor.setVisible(true);
@@ -65,7 +67,7 @@ public class LoginPage
 	public void setSButton()
 	{
 		secretary = new JButton(new ImageIcon("images/SecretaryIcon.png"));
-		secretary.setBounds(420, 350, 150, 150);
+		secretary.setBounds(420, 270, 150, 150);
 		secretary.setBackground(darkBlue);
 		//secretary.setFont(font2);
 		secretary.setVisible(true);
@@ -76,7 +78,7 @@ public class LoginPage
 	public void setCButton()
 	{
 		client = new JButton(new ImageIcon("images/ClientIcon.png"));
-		client.setBounds(645, 350, 150, 150);
+		client.setBounds(645, 270, 150, 150);
 		client.setBackground(darkBlue);
 		//client.setFont(font2);
 		client.setVisible(true);
@@ -84,10 +86,22 @@ public class LoginPage
 		client.setOpaque(true);
 	}
 
+	public void setRButton()
+	{
+		register = new JButton("REGISTER");
+		register.setBounds(410, 440, 170, 40);
+		register.setBackground(clinicGreen);
+		register.setFont(font1);
+		register.setForeground(white);
+		register.setVisible(true);
+		register.setOpaque(true);
+		register.setBorderPainted(false);
+	}
+
 	public void setFirstName()
 	{
 		firstName = new JTextField("First Name");
-		firstName.setBounds(210, 250, 250, 50);
+		firstName.setBounds(210, 220, 250, 50);
 		firstName.setBackground(white);
 		firstName.setFont(font1);
 		//firstName.setForeground(lightGrey);
@@ -99,7 +113,7 @@ public class LoginPage
 	public void setLastName()
 	{
 		lastName = new JTextField("Last Name");
-		lastName.setBounds(530, 250, 250, 50);
+		lastName.setBounds(530, 220, 250, 50);
 		lastName.setBackground(white);
 		lastName.setFont(font1);
 		//lastName.setForeground(lightGrey);
@@ -110,7 +124,7 @@ public class LoginPage
 	public void setLogo()
 	{
 		logo = new JLabel(new ImageIcon("images/Logo.png"));
-		logo.setBounds(200, 100, 600, 200);
+		logo.setBounds(200, 60, 600, 200);
 		logo.setVisible(true);
 	}
 
@@ -127,6 +141,11 @@ public class LoginPage
 	public JButton getCButton()
 	{
 		return client;
+	}
+
+	public JButton getRButton()
+	{
+		return register;
 	}
 
 	public String getFirstName()
@@ -148,12 +167,13 @@ public class LoginPage
 
 	private JLabel logo;
 
-	private JTextField firstName;
-	private JTextField lastName;
+	public JTextField firstName;
+	public JTextField lastName;
 
-	private JButton doctor;
-	private JButton secretary;
-	private JButton client;
+	public JButton doctor;
+	public JButton secretary;
+	public JButton client;
+	public JButton register;
 
 	private Font font1;
 	private Font font2;

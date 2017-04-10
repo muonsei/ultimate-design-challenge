@@ -574,11 +574,11 @@ public class SidebarComponent implements ComponentMaker
 
 	private JScrollPane scrollCalendarTable;
 	private DefaultTableModel modelCalendarTable;
-	private JTable calendarTable;
+	public JTable calendarTable;
 
 	private int dayBound;
 	private int monthBound;
 	private int yearBound;
-	private int monthToday;
-	private int yearToday;
+	public int monthToday;
+	public int yearToday;
 }
