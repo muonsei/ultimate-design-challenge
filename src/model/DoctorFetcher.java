@@ -57,10 +57,35 @@ public class DoctorFetcher implements I_Fetcher {
 		
 		return doctorList;
 	}
+	
+	public Doctor getByID(int id) {
+		ArrayList<Doctor> doctorList = new ArrayList<Doctor>();
+		
+		try {
+			ResultSet rs;
+			String query = "SELECT * FROM doctor WHERE doctor_id = " + id +
+					" ORDER BY doctor_id";
+			
+			Statement stment = connection.getConnection().createStatement();
+			rs = stment.executeQuery(query);
+			
+			while (rs.next()) {
+				Doctor doctor = toObject(rs);
+				doctorList.add(doctor);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if (!doctorList.isEmpty())
+			return doctorList.get(0);
+		
+		return null;
+	}
 
 	@Override
 	public Doctor toObject(ResultSet rs) throws SQLException {
-		Doctor doctor = new Doctor(rs.getString("doctor_name"), rs.getInt("doctor_red"),
+		Doctor doctor = new Doctor(rs.getInt("doctor_id"), rs.getString("doctor_name"), rs.getInt("doctor_red"),
 				rs.getInt("doctor_green"), rs.getInt("doctor_blue"));
 		AppointmentFetcher af = new AppointmentFetcher();
 		ScheduleFetcher sf = new ScheduleFetcher();
