@@ -4,7 +4,7 @@ USE `udc`;
 --
 -- Host: localhost    Database: udc
 -- ------------------------------------------------------
--- Server version	5.6.33-log
+-- Server version	5.7.17-log
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -103,7 +103,6 @@ DROP TABLE IF EXISTS `schedule`;
 CREATE TABLE `schedule` (
   `sched_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `doctor_id` varchar(45) DEFAULT NULL,
-  `schedule_name` varchar(45) DEFAULT NULL,
   `day` varchar(1) DEFAULT NULL,
   `from_time` varchar(45) DEFAULT NULL,
   `to_time` varchar(45) DEFAULT NULL,
@@ -117,7 +116,7 @@ CREATE TABLE `schedule` (
 
 LOCK TABLES `schedule` WRITE;
 /*!40000 ALTER TABLE `schedule` DISABLE KEYS */;
-INSERT INTO `schedule` VALUES (1,'1',NULL,'M','07:30',NULL);
+INSERT INTO `schedule` VALUES (1,'1','M','07:30','09:30');
 /*!40000 ALTER TABLE `schedule` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -158,4 +157,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-04-10 11:02:25
+-- Dump completed on 2017-04-10 23:44:47
