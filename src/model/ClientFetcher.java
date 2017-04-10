@@ -41,7 +41,7 @@ public class ClientFetcher implements I_Fetcher {
 		
 		try {
 			ResultSet rs;
-			String query = "SELECT * FROM client WHERE client_name LIKE %" + keyword + "%" +
+			String query = "SELECT * FROM client WHERE client_name LIKE '%" + keyword + "%'" +
 					" ORDER BY client_name";
 			
 			Statement stment = connection.getConnection().createStatement();
@@ -63,8 +63,8 @@ public class ClientFetcher implements I_Fetcher {
 		
 		try {
 			ResultSet rs;
-			String query = "SELECT * FROM client WHERE client_name = " + keyword +
-					" ORDER BY client_id";
+			String query = "SELECT * FROM client WHERE client_name = '" + keyword +
+					"' ORDER BY client_id";
 			
 			Statement stment = connection.getConnection().createStatement();
 			rs = stment.executeQuery(query);

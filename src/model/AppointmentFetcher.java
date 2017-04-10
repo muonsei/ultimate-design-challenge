@@ -49,7 +49,7 @@ public class AppointmentFetcher implements I_Fetcher {
 		try {
 			ResultSet rs;
 			String query = "SELECT appointment.time, appointment.date FROM appointment, client WHERE appointment.client_id = client.client_id "
-					+ "AND client.client_name LIKE %" + keyword + "%" +
+					+ "AND client.client_name LIKE '%" + keyword + "%'" +
 					" ORDER BY client_name";
 			
 			Statement stment = connection.getConnection().createStatement();
@@ -72,7 +72,7 @@ public class AppointmentFetcher implements I_Fetcher {
 		try {
 			ResultSet rs;
 			String query = "SELECT appointment.time, appointment.date FROM appointment, doctor WHERE appointment.doctor_id = doctor.doctor_id "
-					+ "AND doctor.doctor_name LIKE %" + keyword + "%" +
+					+ "AND doctor.doctor_name LIKE '%" + keyword + "%'" +
 					" ORDER BY doctor_name";
 			
 			Statement stment = connection.getConnection().createStatement();
@@ -95,7 +95,7 @@ public class AppointmentFetcher implements I_Fetcher {
 		try {
 			ResultSet rs;
 			String query = "SELECT appointment.time, appointment.date FROM appointment, client WHERE appointment.client_id = client.client_id "
-					+ "AND client.client_name LIKE %" + keyword + "%" +
+					+ "AND client.client_name LIKE '%" + keyword + "%'" +
 					" ORDER BY client_name";
 			
 			Statement stment = connection.getConnection().createStatement();

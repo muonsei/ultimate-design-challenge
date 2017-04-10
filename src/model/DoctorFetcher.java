@@ -41,7 +41,7 @@ public class DoctorFetcher implements I_Fetcher {
 		
 		try {
 			ResultSet rs;
-			String query = "SELECT * FROM doctor WHERE doctor_name LIKE %" + keyword + "%" +
+			String query = "SELECT * FROM doctor WHERE doctor_name LIKE '%" + keyword + "%'" +
 					" ORDER BY doctor_name";
 			
 			Statement stment = connection.getConnection().createStatement();
@@ -63,8 +63,8 @@ public class DoctorFetcher implements I_Fetcher {
 		
 		try {
 			ResultSet rs;
-			String query = "SELECT * FROM doctor WHERE doctor_name = " + keyword +
-					" ORDER BY doctor_id";
+			String query = "SELECT * FROM doctor WHERE doctor_name = '" + keyword +
+					"' ORDER BY doctor_id";
 			
 			Statement stment = connection.getConnection().createStatement();
 			rs = stment.executeQuery(query);
@@ -119,7 +119,7 @@ public class DoctorFetcher implements I_Fetcher {
 				rs.getInt("doctor_green"), rs.getInt("doctor_blue"));
 		AppointmentFetcher af = new AppointmentFetcher();
 		ScheduleFetcher sf = new ScheduleFetcher();
-		ArrayList<Appointment> appointmentList = af.getBySearch(doctor.getDoctorName());
+		ArrayList<Appointment> appointmentList = af.getByDoctor(doctor.getDoctorName());
 		ArrayList<Schedule> scheduleList = sf.getBySearch(doctor.getDoctorName());
 		doctor.setAppointmentList(appointmentList);
 		doctor.setScheduleList(scheduleList);
