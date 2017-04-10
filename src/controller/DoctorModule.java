@@ -5,6 +5,9 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
+
+import model.Doctor;
+import model.DoctorFetcher;
 import java.awt.event.*;
 import java.net.*;
 import java.io.*;
@@ -16,9 +19,10 @@ import view.ComponentMaker;
 
 public class DoctorModule implements ObserverModule
 {
-	public DoctorModule(char mode, String name)
+	public DoctorModule(char mode, int id)
 	{
-		this.name = name;
+		df = new DoctorFetcher();
+		doctor = df.getByID(id);
 		green = new Color(24, 200, 148);
 		darkGreen = new Color(29, 168, 122);
 		lightGreen = new Color(157, 249, 212);
@@ -30,7 +34,7 @@ public class DoctorModule implements ObserverModule
 		mainFrame.setBounds(0, 0, 1000, 580);
 		mainFrame.setBackground(Color.white);
 
-		menu = new MenuComponent(this.name, mode);
+		menu = new MenuComponent(doctor.getDoctorName(), mode);
 		sidebar = new SidebarComponent(mode);
 		calendar = new CalendarComponent(mode);
 		agenda = new AgendaComponent(mode);
@@ -94,6 +98,7 @@ public class DoctorModule implements ObserverModule
 		/* logic for the updates */
 	}
 
+	/* Action Listener for top menu */
 	class mode_action implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -130,6 +135,7 @@ public class DoctorModule implements ObserverModule
 		}
 	}
 
+	/* For calendar and agenda */
 	class form_action implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -154,6 +160,7 @@ public class DoctorModule implements ObserverModule
 		}
 	}
 
+	/* Create Schedule */
 	class create_action implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -166,7 +173,8 @@ public class DoctorModule implements ObserverModule
 			String toTime = sidebar.getInformation('t');
 
 			/*
-				To-do with the database
+				Insert these things into the database.
+				Then return the specific doctor
 			*/
 		}
 	}
@@ -198,7 +206,7 @@ public class DoctorModule implements ObserverModule
 	}
 
 	private JPanel mainFrame;
-	private String name;
+	private Doctor doctor;
 	private ComponentMaker menu;
 	private ComponentMaker sidebar;
 	private ComponentMaker agenda;
@@ -210,4 +218,6 @@ public class DoctorModule implements ObserverModule
 	private Color white;
 	private Color grey;
 	private Color lightGrey;
+	
+	private DoctorFetcher df;
 }
