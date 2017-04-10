@@ -58,6 +58,31 @@ public class DoctorFetcher implements I_Fetcher {
 		return doctorList;
 	}
 	
+	public Doctor getByExactName(String keyword) {
+		ArrayList<Doctor> doctorList = new ArrayList<Doctor>();
+		
+		try {
+			ResultSet rs;
+			String query = "SELECT * FROM doctor WHERE doctor_name = " + keyword +
+					" ORDER BY doctor_id";
+			
+			Statement stment = connection.getConnection().createStatement();
+			rs = stment.executeQuery(query);
+			
+			while (rs.next()) {
+				Doctor doctor = toObject(rs);
+				doctorList.add(doctor);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		if (!doctorList.isEmpty())
+			return doctorList.get(0);
+		
+		return null;
+	}
+	
 	public Doctor getByID(int id) {
 		ArrayList<Doctor> doctorList = new ArrayList<Doctor>();
 		
@@ -81,6 +106,11 @@ public class DoctorFetcher implements I_Fetcher {
 			return doctorList.get(0);
 		
 		return null;
+	}
+	
+	public Doctor ifExists(String name) {
+		Doctor doctor = getByExactName(name);
+		return doctor;
 	}
 
 	@Override
