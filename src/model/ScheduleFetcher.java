@@ -41,9 +41,9 @@ private DBConnection connection;
 		
 		try {
 			ResultSet rs;
-			String query = "SELECT schedule.day, schedule.time FROM schedule, doctor WHERE "
-					+ "schedule.doctor_id = doctor.doctor_id AND doctor.doctor_name LIKE "
-					+ doctorName;
+			String query = "SELECT schedule.day, schedule.from_time, schedule.to_time FROM schedule, doctor WHERE "
+					+ "schedule.doctor_id = doctor.doctor_id AND doctor.doctor_name LIKE '"
+					+ doctorName + "'";
 			
 			Statement stment = connection.getConnection().createStatement();
 			rs = stment.executeQuery(query);
@@ -61,8 +61,7 @@ private DBConnection connection;
 
 	@Override
 	public Schedule toObject(ResultSet rs) throws SQLException {
-		Schedule schedule = new Schedule(rs.getString("schedule_name"), 
-			rs.getString("day").charAt(0), rs.getString("from_time"), rs.getString("to_time"));
+		Schedule schedule = new Schedule(rs.getString("day").charAt(0), rs.getString("from_time"), rs.getString("to_time"));
 		return schedule;
 	}
 }
