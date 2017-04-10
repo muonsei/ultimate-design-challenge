@@ -220,13 +220,13 @@ public class DoctorModule implements ObserverModule
 			if(temp.free.isSelected() == true)
 			{
 				/* free schedules */
-				temp.free.setSelectedIcon(new ImageIcon("images/selectedCheckBox.png"));
+				temp.free.setSelectedIcon(new ImageIcon("resources/selectedCheckBox.png"));
 			}
 
 			if(temp.reserved.isSelected() == true)
 			{
 				/* reserved schedules */
-				temp.reserved.setSelectedIcon(new ImageIcon("images/selectedCheckBox.png"));
+				temp.reserved.setSelectedIcon(new ImageIcon("resources/selectedCheckBox.png"));
 			}
 		}
 	}
