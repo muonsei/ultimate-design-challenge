@@ -36,8 +36,8 @@ public class DoctorModule implements ObserverModule
 		agenda = new AgendaComponent(mode);
 
 		addMenuActions();
-		//addSidebarActions();
-		//addCalendarActions();
+		addSidebarActions();
+		addCalendarActions();
 
 		combineAll();
 	}
@@ -57,6 +57,31 @@ public class DoctorModule implements ObserverModule
 		menu.getButton('w').addActionListener(new mode_action());
 		menu.getButton('c').addActionListener(new form_action());
 		menu.getButton('a').addActionListener(new form_action());
+	}
+
+	public void addSidebarActions()
+	{
+		SidebarComponent temp = (SidebarComponent)sidebar;
+		sidebar.getButton('c').addActionListener(new create_action());
+		temp.free.addActionListener(new filter_action());
+		temp.reserved.addActionListener(new filter_action());
+	}
+
+	public void addCalendarActions()
+	{
+		CalendarComponent temp = (CalendarComponent) calendar;
+
+		for(int i = 0; i < temp.sunday.size(); i++)
+		{
+			temp.sunday.get(i).addActionListener(new cell_action());
+			temp.monday.get(i).addActionListener(new cell_action());
+			temp.tuesday.get(i).addActionListener(new cell_action());
+			temp.wednesday.get(i).addActionListener(new cell_action());
+			temp.thursday.get(i).addActionListener(new cell_action());
+			temp.friday.get(i).addActionListener(new cell_action());
+			temp.saturday.get(i).addActionListener(new cell_action());
+			temp.oneDay.get(i).addActionListener(new cell_action());
+		}
 	}
 
 	public JPanel launchFrame()
@@ -125,6 +150,49 @@ public class DoctorModule implements ObserverModule
 
 				calendar.getMainPanel().setVisible(false);
 				agenda.getMainPanel().setVisible(true);
+			}
+		}
+	}
+
+	class create_action implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			String scheduleName = sidebar.getInformation('e');
+			String year = sidebar.getInformation('y');
+			String month = sidebar.getInformation('m');
+			String day = sidebar.getInformation('d');
+			String fromTime = sidebar.getInformation('f');
+			String toTime = sidebar.getInformation('t');
+
+			/*
+				To-do with the database
+			*/
+		}
+	}
+
+	class cell_action implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+
+		}
+	}
+
+	class filter_action implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			SidebarComponent temp = (SidebarComponent)sidebar;
+
+			if(temp.free.isSelected() == true)
+			{
+				/* free schedules */
+			}
+
+			if(temp.reserved.isSelected() == true)
+			{
+				/* reserved schedules */
 			}
 		}
 	}

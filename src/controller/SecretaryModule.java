@@ -36,8 +36,8 @@ public class SecretaryModule implements ObserverModule
 		agenda = new AgendaComponent(mode);
 
 		addMenuActions();
-		//addSidebarActions();
-		//addCalendarActions();
+		addSidebarActions();
+		addCalendarActions();
 
 		combineAll();
 	}
@@ -59,6 +59,29 @@ public class SecretaryModule implements ObserverModule
 		menu.getButton('a').addActionListener(new form_action());
 	}
 
+	public void addSidebarActions()
+	{
+		sidebar.getButton('c').addActionListener(new create_action());
+		sidebar.getButton('f').addActionListener(new filter_action());
+	}
+
+	public void addCalendarActions()
+	{
+		CalendarComponent temp = (CalendarComponent) calendar;
+
+		for(int i = 0; i < temp.sunday.size(); i++)
+		{
+			temp.sunday.get(i).addActionListener(new cell_action());
+			temp.monday.get(i).addActionListener(new cell_action());
+			temp.tuesday.get(i).addActionListener(new cell_action());
+			temp.wednesday.get(i).addActionListener(new cell_action());
+			temp.thursday.get(i).addActionListener(new cell_action());
+			temp.friday.get(i).addActionListener(new cell_action());
+			temp.saturday.get(i).addActionListener(new cell_action());
+			temp.oneDay.get(i).addActionListener(new cell_action());
+		}
+	}
+
 	public JPanel launchFrame()
 	{
 		return mainFrame;
@@ -74,24 +97,33 @@ public class SecretaryModule implements ObserverModule
 		public void actionPerformed(ActionEvent e)
 		{
 			CalendarComponent temp = (CalendarComponent)calendar;
+			AgendaComponent temp1 = (AgendaComponent) agenda;
 			if(e.getSource().equals(menu.getButton('d')))
 			{
 				menu.getButton('d').setBackground(darkGreen);
 				menu.getButton('w').setBackground(green);
+
 				calendar.getPanel('d').setVisible(true);
 				calendar.getPanel('w').setVisible(false);
+
 				temp.dailyScrollPane.setVisible(true);
 				temp.weeklyScrollPane.setVisible(false);
+				temp1.dailyScrollPane.setVisible(true);
+				temp1.weeklyScrollPane.setVisible(false);
 			}
 
 			else if(e.getSource().equals(menu.getButton('w')))
 			{
 				menu.getButton('w').setBackground(darkGreen);
 				menu.getButton('d').setBackground(green);
+
 				calendar.getPanel('w').setVisible(true);
 				calendar.getPanel('d').setVisible(false);
+
 				temp.dailyScrollPane.setVisible(false);
 				temp.weeklyScrollPane.setVisible(true);
+				temp1.dailyScrollPane.setVisible(false);
+				temp1.weeklyScrollPane.setVisible(true);
 			}
 		}
 	}
@@ -104,13 +136,52 @@ public class SecretaryModule implements ObserverModule
 			{
 				menu.getButton('c').setBackground(darkGreen);
 				menu.getButton('a').setBackground(green);
+
+				calendar.getMainPanel().setVisible(true);
+				agenda.getMainPanel().setVisible(false);
 			}
 
 			else if(e.getSource().equals(menu.getButton('a')))
 			{
 				menu.getButton('a').setBackground(darkGreen);
 				menu.getButton('c').setBackground(green);
+
+				calendar.getMainPanel().setVisible(false);
+				agenda.getMainPanel().setVisible(true);
 			}
+		}
+	}
+
+	class create_action implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			String scheduleName = sidebar.getInformation('e');
+			String year = sidebar.getInformation('y');
+			String month = sidebar.getInformation('m');
+			String day = sidebar.getInformation('d');
+			String fromTime = sidebar.getInformation('f');
+			String toTime = sidebar.getInformation('t');
+
+			/*
+				To-do with the database
+			*/
+		}
+	}
+
+	class cell_action implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+
+		}
+	}
+
+	class filter_action implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			
 		}
 	}
 
