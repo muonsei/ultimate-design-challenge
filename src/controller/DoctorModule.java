@@ -117,13 +117,6 @@ public class DoctorModule implements ObserverModule
 		return mainFrame;
 	}
 
-	public void updateDetails()
-	{
-		/* logic for the updates */
-		/* to be done by MJ/Mariel */
-	}
-
-	/* Action Listener for top menu */
 	class mode_action implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
