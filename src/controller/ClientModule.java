@@ -13,12 +13,15 @@ import view.SidebarComponent;
 import view.CalendarComponent;
 import view.AgendaComponent;
 import view.ComponentMaker;
+import model.Client;
+import model.ClientFetcher;
+import model.DoctorFetcher;
 
 public class ClientModule implements ObserverModule
 {
-	public ClientModule(char mode, String name)
+	public ClientModule(char mode, Client client)
 	{
-		this.name = name;
+		this.client = client;
 		green = new Color(24, 200, 148);
 		darkGreen = new Color(29, 168, 122);
 		lightGreen = new Color(157, 249, 212);
@@ -30,7 +33,7 @@ public class ClientModule implements ObserverModule
 		mainFrame.setBounds(0, 0, 1000, 580);
 		mainFrame.setBackground(Color.white);
 
-		menu = new MenuComponent(this.name, mode);
+		menu = new MenuComponent(client.getClientName(), mode);
 		sidebar = new SidebarComponent(mode);
 		calendar = new CalendarComponent(mode);
 		agenda = new AgendaComponent(mode);
@@ -40,6 +43,32 @@ public class ClientModule implements ObserverModule
 		addCalendarActions();
 
 		combineAll();
+
+		SidebarComponent sidebarTemp = (SidebarComponent)sidebar;
+		CalendarComponent calendarTemp = (CalendarComponent)calendar;
+		MenuComponent menuTemp = (MenuComponent)menu;
+		sidebarTemp.calendarTable.addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(MouseEvent evt)
+            {
+            	int col = sidebarTemp.calendarTable.getSelectedColumn();
+	            int row = sidebarTemp.calendarTable.getSelectedRow();
+	            
+            	if(sidebarTemp.calendarTable.getModel().getValueAt(row, col) != null)
+            	{
+            		String selectedDay = sidebarTemp.calendarTable.getModel().getValueAt(row, col).toString();
+            		String[] months =  {"January", "February", "March", "April", "May", "June", "July",
+							"August", "September", "October", "November", "December"};
+
+					String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
+            		menuTemp.dateLabel.setText(months[sidebarTemp.monthToday].toUpperCase() + " " + selectedDay + ", " +
+            			Integer.toString(sidebarTemp.yearToday));
+
+            		calendarTemp.dayField.setText(days[col].toUpperCase());
+	            }
+            }
+        });
 	}
 
 	public void combineAll()
@@ -90,8 +119,10 @@ public class ClientModule implements ObserverModule
 	public void updateDetails()
 	{
 		/* logic for the updates */
+		/* to be done by MJ/Mariel */
 	}
 
+	/* Action Listener for top menu */
 	class mode_action implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -164,7 +195,8 @@ public class ClientModule implements ObserverModule
 			String toTime = sidebar.getInformation('t');
 
 			/*
-				To-do with the database
+				Insert these things into the database.
+				Then return new things
 			*/
 		}
 	}
@@ -186,7 +218,7 @@ public class ClientModule implements ObserverModule
 	}
 
 	private JPanel mainFrame;
-	private String name;
+	private Client client;
 	private ComponentMaker menu;
 	private ComponentMaker sidebar;
 	private ComponentMaker agenda;
