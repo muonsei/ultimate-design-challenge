@@ -74,6 +74,7 @@ public class MenuComponent implements ComponentMaker
 		notificationsButton.setBounds(40, 11, 30, 30);
 		notificationsButton.setBackground(green);
 		notificationsButton.setBorder(null);
+		notificationsButton.addActionListener(new notif_action());
 
 		dailyButton = createButton("Daily");
 		dailyButton.setBounds(77, 11, 90, 31);
@@ -122,6 +123,7 @@ public class MenuComponent implements ComponentMaker
 
 		dateLabel = createLabel(month + " " + Integer.toString(day) + ", " + Integer.toString(year));
 		dateLabel.setBounds(363, 11, 90, 31);
+		dateLabel.setBounds(355, 11, 150, 31);
 		dateLabel.setFont(mainFont);
 		dateLabel.setForeground(white);
 	}
