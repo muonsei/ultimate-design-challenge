@@ -1,9 +1,7 @@
-package Model;
+package model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-
-import Database.DBConnection;
 
 public class AppointmentManager implements I_Manager{
 	

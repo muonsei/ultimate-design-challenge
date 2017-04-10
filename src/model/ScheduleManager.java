@@ -1,8 +1,8 @@
-package Model;
+package model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import Database.DBConnection;
+import model.DBConnection;
 
 public class ScheduleManager implements I_Manager{
 

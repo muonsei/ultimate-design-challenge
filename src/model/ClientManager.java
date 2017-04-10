@@ -1,8 +1,7 @@
-package Model;
+package model;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import Database.DBConnection;
 
 public class ClientManager implements I_Manager{
 
