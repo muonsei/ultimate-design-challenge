@@ -72,16 +72,15 @@ public class AppointmentProgram
 			{
 				//mainFrame.removeAll();
 				// Check the existence of the person
-				Doctor doctor = df.ifExists(login.firstName.getText());
+				Doctor doctor = df.ifExists(login.lastName.getText() + ", " + login.firstName.getText());
 				if (doctor != null) {
 					//Doctor exists. Make new doctor module.
 					doctorDashboard = new DoctorModule('d', doctor);
+					mainFrame.add(doctorDashboard.launchFrame());
+					login.getLogInPanel().setVisible(false);
 				} else {
 					//Doctor does not exist. DO SOMETHING HERE.
 				}
-				
-				mainFrame.add(doctorDashboard.launchFrame());
-				login.getLogInPanel().setVisible(false);
 			}
 
 			else if(e.getSource().equals(login.secretary))
@@ -95,15 +94,15 @@ public class AppointmentProgram
 			else if(e.getSource().equals(login.client))
 			{
 				//mainFrame.removeAll();
-				Client client = cf.ifExists(login.firstName.getText());
+				Client client = cf.ifExists(login.getLastName() + ", " + login.firstName.getText());
 				if (client != null) {
 					//Client exists. Make new client module.
 					clientDashboard = new ClientModule('c', client);
+					mainFrame.add(clientDashboard.launchFrame());
+					login.getLogInPanel().setVisible(false);
 				} else {
 					//Client does not exist. DO SOMETHING HERE.
 				}
-				mainFrame.add(clientDashboard.launchFrame());
-				login.getLogInPanel().setVisible(false);
 			}
 		}
 	}
