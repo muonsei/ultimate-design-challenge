@@ -62,6 +62,12 @@ public class DoctorFetcher implements I_Fetcher {
 	public Doctor toObject(ResultSet rs) throws SQLException {
 		Doctor doctor = new Doctor(rs.getString("doctor_name"), rs.getInt("doctor_red"),
 				rs.getInt("doctor_green"), rs.getInt("doctor_blue"));
+		AppointmentFetcher af = new AppointmentFetcher();
+		ScheduleFetcher sf = new ScheduleFetcher();
+		ArrayList<Appointment> appointmentList = af.getBySearch(doctor.getDoctorName());
+		ArrayList<Schedule> scheduleList = sf.getBySearch(doctor.getDoctorName());
+		doctor.setAppointmentList(appointmentList);
+		doctor.setScheduleList(scheduleList);
 		return doctor;
 	}
 }
