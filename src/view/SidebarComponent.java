@@ -1,5 +1,3 @@
-package view;
-
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
@@ -26,7 +24,7 @@ public class SidebarComponent implements ComponentMaker
 		italicMainFont = createFont(2, 13);
 		subFont = createFont(1, 10);
 		italicSubFont = createFont(2, 10);
-		filterFont = createFont(3, 13);
+		filterFont = createFont(4, 13);
 
 		setMainPanel();
 		setButtons();
@@ -61,11 +59,26 @@ public class SidebarComponent implements ComponentMaker
 		from.setBounds(10, 290, 205, 25);
 		to.setBounds(10, 320, 205, 25);
 		createButton.setBounds(10, 350, 205, 40);
+		createButton.setText("Reserve");
+
+		fromLabel.setBounds(10, 290, 205, 25);
+		toLabel.setBounds(10, 320, 205, 25);
+
+		eventField.setEditable(false);
+		yearField.setEditable(false);
+		monthField.setEditable(false);
+		dayField.setEditable(false);
 
 		free.setVisible(false);
 		reserved.setVisible(false);
 		filter.setVisible(false);
+		from.setVisible(false);
+		to.setVisible(false);
+		single.setVisible(false);
+		recurring.setVisible(false);
 
+		mainPanel.add(fromLabel);
+		mainPanel.add(toLabel);
 		mainPanel.add(filterSet);
 		mainPanel.add(onBehalf);
 	}
@@ -77,6 +90,7 @@ public class SidebarComponent implements ComponentMaker
 		monthField.setBounds(90, 228, 60, 25);
 		dayField.setBounds(155, 228, 60, 25);
 		createButton.setBounds(10, 330, 205, 40);
+		filterSet.setBounds(10, 380, 205, 25);
 
 		createButton.setText("Reserve");
 
@@ -85,6 +99,8 @@ public class SidebarComponent implements ComponentMaker
 		filter.setVisible(false);
 		from.setVisible(false);
 		to.setVisible(false);
+		single.setVisible(false);
+		recurring.setVisible(false);
 
 		eventField.setEditable(false);
 		yearField.setEditable(false);
@@ -93,6 +109,7 @@ public class SidebarComponent implements ComponentMaker
 
 		mainPanel.add(fromLabel);
 		mainPanel.add(toLabel);
+		mainPanel.add(filterSet);
 
 	}
 
@@ -103,6 +120,8 @@ public class SidebarComponent implements ComponentMaker
 		mainPanel.add(reserved);
 		mainPanel.add(to);
 		mainPanel.add(from);
+		mainPanel.add(single);
+		mainPanel.add(recurring);
 		mainPanel.add(eventField);
 		mainPanel.add(yearField);
 		mainPanel.add(monthField);
@@ -173,7 +192,7 @@ public class SidebarComponent implements ComponentMaker
 	public void setButtons()
 	{
 		createButton = createButton("Create");
-		createButton.setBounds(10, 330, 205, 40);
+		createButton.setBounds(10, 350, 205, 40);
 		createButton.setBackground(green);
 		createButton.setForeground(white);
 		createButton.setFont(mainFont);
@@ -183,15 +202,18 @@ public class SidebarComponent implements ComponentMaker
 
 	public void setCheckBox()
 	{
+		doctorCheckBoxes = new ArrayList<JCheckBox>();
 		free = createCheckBox("Free");
 		reserved = createCheckBox("Reserved");
+		single = createCheckBox("Single");
+		recurring = createCheckBox("Recurring");
 
 		free.setBounds(20, 430, 50, 20);
 		free.setBackground(lightGrey);
 		free.setForeground(grey);
 		free.setVisible(true);
 		free.setFont(subFont);
-		free.setSelectedIcon(new ImageIcon("images/checkBox.png"));
+		free.setIcon(new ImageIcon("images/checkBox.png"));
 		free.setOpaque(true);
 	
 		reserved.setBounds(90, 430, 70, 20);
@@ -199,8 +221,47 @@ public class SidebarComponent implements ComponentMaker
 		reserved.setForeground(grey);
 		reserved.setVisible(true);
 		reserved.setFont(subFont);
-		reserved.setSelectedIcon(new ImageIcon("images/checkBox.png"));
+		reserved.setIcon(new ImageIcon("images/checkBox.png"));
 		reserved.setOpaque(true);
+
+		single.setBounds(20, 320, 70, 20);
+		single.setBackground(lightGrey);
+		single.setForeground(grey);
+		single.setVisible(true);
+		single.setFont(subFont);
+		single.setIcon(new ImageIcon("images/checkBox.png"));
+		single.setSelectedIcon(new ImageIcon("images/selectedCheckBox.png"));
+		single.setOpaque(true);
+		single.addActionListener(new filter_action());
+
+		recurring.setBounds(90, 320, 150, 20);
+		recurring.setBackground(lightGrey);
+		recurring.setForeground(grey);
+		recurring.setVisible(true);
+		recurring.setFont(subFont);
+		recurring.setIcon(new ImageIcon("images/checkBox.png"));
+		recurring.setSelectedIcon(new ImageIcon("images/selectedCheckBox.png"));
+		recurring.setOpaque(true);
+		recurring.addActionListener(new filter_action());
+	}
+
+	class filter_action implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+
+			if(e.getSource().equals(single))
+			{
+				if(single.isSelected() == true)
+					recurring.setSelected(false);
+			}
+
+			else if(e.getSource().equals(recurring))
+			{
+				if(recurring.isSelected() == true)
+					single.setSelected(false);
+			}
+		}
 	}
 
 	public void setComboBox()
@@ -243,11 +304,12 @@ public class SidebarComponent implements ComponentMaker
 
 	public void setTimeLabels()
 	{
-		fromLabel = createField("fromSched");
-		toLabel = createField("toSched");
+		fromLabel = createField("From what time?");
+		toLabel = createField("To what time?");
 
 		fromLabel.setBounds(10, 260, 205, 25);
 		fromLabel.setBackground(white);
+		fromLabel.setFont(italicSubFont);
 		fromLabel.setVisible(true);
 		fromLabel.setEditable(false);
 		fromLabel.setForeground(grey);
@@ -256,6 +318,7 @@ public class SidebarComponent implements ComponentMaker
 
 		toLabel.setBounds(10, 290, 205, 25);
 		toLabel.setBackground(white);
+		toLabel.setFont(italicSubFont);
 		toLabel.setVisible(true);
 		toLabel.setEditable(false);
 		toLabel.setForeground(grey);
@@ -297,6 +360,11 @@ public class SidebarComponent implements ComponentMaker
 		mainPanel.setBorder(lightGreyBorder);
 	}
 
+	public void showFilterOptions()
+	{
+
+	}
+
 	public JPanel getMainPanel()
 	{
 		return mainPanel;
@@ -323,7 +391,10 @@ public class SidebarComponent implements ComponentMaker
 
 	public JButton getButton(char command)
 	{
-		return createButton;
+		if(command == 'c')
+			return createButton;
+
+		return filterSet;
 	}
 
 	public JPanel createPanel()
@@ -534,6 +605,9 @@ public class SidebarComponent implements ComponentMaker
 
 	public JCheckBox free;
 	public JCheckBox reserved;
+	public JCheckBox single;
+	public JCheckBox recurring;
+	public ArrayList<JCheckBox> doctorCheckBoxes;
 
 	public JComboBox from;
 	public JComboBox to;
