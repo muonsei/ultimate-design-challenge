@@ -40,32 +40,6 @@ public class SecretaryModule implements ObserverModule
 		addCalendarActions();
 
 		combineAll();
-		
-		SidebarComponent sidebarTemp = (SidebarComponent)sidebar;
-		CalendarComponent calendarTemp = (CalendarComponent)calendar;
-		MenuComponent menuTemp = (MenuComponent)menu;
-		sidebarTemp.calendarTable.addMouseListener(new MouseAdapter()
-        {
-            public void mouseClicked(MouseEvent evt)
-            {
-            	int col = sidebarTemp.calendarTable.getSelectedColumn();
-	            int row = sidebarTemp.calendarTable.getSelectedRow();
-	            
-            	if(sidebarTemp.calendarTable.getModel().getValueAt(row, col) != null)
-            	{
-            		String selectedDay = sidebarTemp.calendarTable.getModel().getValueAt(row, col).toString();
-            		String[] months =  {"January", "February", "March", "April", "May", "June", "July",
-							"August", "September", "October", "November", "December"};
-
-					String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
-
-            		menuTemp.dateLabel.setText(months[sidebarTemp.monthToday].toUpperCase() + " " + selectedDay + ", " +
-            			Integer.toString(sidebarTemp.yearToday));
-
-            		calendarTemp.dayField.setText(days[col].toUpperCase());
-	            }
-            }
-        });
 	}
 
 	public void combineAll()
@@ -111,6 +85,11 @@ public class SecretaryModule implements ObserverModule
 	public JPanel launchFrame()
 	{
 		return mainFrame;
+	}
+
+	public void updateDetails()
+	{
+		/* logic for the updates */
 	}
 
 	class mode_action implements ActionListener
