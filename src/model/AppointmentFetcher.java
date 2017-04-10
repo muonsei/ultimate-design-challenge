@@ -25,8 +25,8 @@ public class AppointmentFetcher implements I_Fetcher {
 			rs = stment.executeQuery(query);
 			
 			while (rs.next()) {
-				Client client = toObject(rs);
-				clientList.add(client);
+				Appointment appointment = toObject(rs);
+				appointmentList.add(appointment);
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();
