@@ -94,7 +94,7 @@ public class AppointmentProgram
 			else if(e.getSource().equals(login.client))
 			{
 				//mainFrame.removeAll();
-				Client client = cf.ifExists(login.getLastName() + ", " + login.firstName.getText());
+				Client client = cf.ifExists(login.lastName.getText() + ", " + login.firstName.getText());
 				if (client != null) {
 					//Client exists. Make new client module.
 					clientDashboard = new ClientModule('c', client);
