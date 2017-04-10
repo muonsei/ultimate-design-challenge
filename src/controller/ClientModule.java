@@ -30,7 +30,7 @@ public class ClientModule implements ObserverModule
 		mainFrame.setBounds(0, 0, 1000, 580);
 		mainFrame.setBackground(Color.white);
 
-		menu = new MenuComponent(this.name);
+		menu = new MenuComponent(this.name, mode);
 		sidebar = new SidebarComponent(mode);
 		calendar = new CalendarComponent(mode);
 		agenda = new AgendaComponent(mode);
