@@ -13,9 +13,9 @@ public class ScheduleManager implements I_Manager{
 		connection = new DBConnection();
 	}
 	
-	public boolean add(Object s)
+	public boolean add(Object s, int doctor_id)
 	{
-		String query = "INSERT INTO schedule (doctor_id,day, time) VALUES(?,?,?)";
+		String query = "INSERT INTO schedule (doctor_id, day, time) VALUES(?,?,?)";
 		PreparedStatement statement;
 		
 		try{
