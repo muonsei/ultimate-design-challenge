@@ -1,3 +1,5 @@
+package controller;
+
 import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*;
@@ -6,6 +8,11 @@ import javax.swing.event.*;
 import java.awt.event.*;
 import java.net.*;
 import java.io.*;
+import view.MenuComponent;
+import view.SidebarComponent;
+import view.CalendarComponent;
+import view.AgendaComponent;
+import view.ComponentMaker;
 
 public class SecretaryModule implements ObserverModule
 {
@@ -23,7 +30,7 @@ public class SecretaryModule implements ObserverModule
 		mainFrame.setBounds(0, 0, 1000, 580);
 		mainFrame.setBackground(Color.white);
 
-		menu = new MenuComponent(this.name);
+		menu = new MenuComponent(this.name, mode);
 		sidebar = new SidebarComponent(mode);
 		calendar = new CalendarComponent(mode);
 		agenda = new AgendaComponent(mode);

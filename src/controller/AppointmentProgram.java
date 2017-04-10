@@ -1,3 +1,5 @@
+package controller;
+
 import java.util.ArrayList;
 import java.awt.*;
 import javax.swing.*;
@@ -6,6 +8,7 @@ import javax.swing.event.*;
 import java.awt.event.*;
 import java.net.*;
 import java.io.*;
+import view.LoginPage;
 
 public class AppointmentProgram
 {
