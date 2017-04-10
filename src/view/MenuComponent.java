@@ -70,7 +70,7 @@ public class MenuComponent implements ComponentMaker
 	public void setButtons()
 	{
 		notificationsButton = createButton("");
-		notificationsButton.setIcon(new ImageIcon("images/notifications-inactive.png"));
+		notificationsButton.setIcon(new ImageIcon("resources/notifications-inactive.png"));
 		notificationsButton.setBounds(40, 11, 30, 30);
 		notificationsButton.setBackground(green);
 		notificationsButton.setBorder(null);

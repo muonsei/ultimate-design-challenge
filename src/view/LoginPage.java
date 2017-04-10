@@ -55,7 +55,7 @@ public class LoginPage
 
 	public void setDButton()
 	{
-		doctor = new JButton(new ImageIcon("images/DoctorIcon.png"));
+		doctor = new JButton(new ImageIcon("resources/DoctorIcon.png"));
 		doctor.setBounds(200, 270, 150, 150);
 		doctor.setBackground(darkBlue);
 		//doctor.setFont(font2);
@@ -66,7 +66,7 @@ public class LoginPage
 
 	public void setSButton()
 	{
-		secretary = new JButton(new ImageIcon("images/SecretaryIcon.png"));
+		secretary = new JButton(new ImageIcon("resources/SecretaryIcon.png"));
 		secretary.setBounds(420, 270, 150, 150);
 		secretary.setBackground(darkBlue);
 		//secretary.setFont(font2);
@@ -77,7 +77,7 @@ public class LoginPage
 
 	public void setCButton()
 	{
-		client = new JButton(new ImageIcon("images/ClientIcon.png"));
+		client = new JButton(new ImageIcon("resources/ClientIcon.png"));
 		client.setBounds(645, 270, 150, 150);
 		client.setBackground(darkBlue);
 		//client.setFont(font2);
@@ -123,7 +123,7 @@ public class LoginPage
 
 	public void setLogo()
 	{
-		logo = new JLabel(new ImageIcon("images/Logo.png"));
+		logo = new JLabel(new ImageIcon("resources/Logo.png"));
 		logo.setBounds(200, 60, 600, 200);
 		logo.setVisible(true);
 	}
