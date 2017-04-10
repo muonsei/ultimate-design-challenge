@@ -10,4 +10,14 @@ public class Client {
 		this.clientName = clientName;
 		appointmentList = new ArrayList<Appointment>();
 	}
+	
+	public String getClientName()
+	{
+		return clientName;
+	}
+	
+	public void setClientName(String n)
+	{
+		clientName = n;
+	}
 }

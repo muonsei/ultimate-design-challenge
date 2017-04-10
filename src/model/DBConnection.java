@@ -2,6 +2,7 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class DBConnection {
 	private String	driverName	= "com.mysql.jdbc.Driver";// change
@@ -10,10 +11,11 @@ public class DBConnection {
 	private String	database	= "udc";// change
 	private String	username	= "root";// change
 	private String	password	= "1234";// change
-
+	private Connection con;
+	
 	public Connection getConnection() {
 		try {
-			Connection con = DriverManager
+			con = DriverManager
 					.getConnection(getUrl() + getDatabase() + "?useSSL=false", getUsername(), getPassword());
 			System.out.println("DBConnection::Connection SUCCESS");
 			return con;
@@ -61,5 +63,16 @@ public class DBConnection {
 
 	public void setDatabase(String database) {
 		this.database = database;
+	}
+	
+	public void close() {
+		
+		try {
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 }

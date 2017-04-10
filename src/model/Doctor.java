@@ -14,4 +14,24 @@ public class Doctor {
 		color[1] = green;
 		color[2] = blue;
 	}
+	
+	public String getDoctorName()
+	{
+		return doctorName;
+	}
+	
+	public void setDoctorName(String n)
+	{
+		doctorName = n;
+	}
+	
+	public void setDoctorColor(int red, int green, int blue) {
+		color[0] = red;
+		color[1] = green;
+		color[2] = blue;
+	}
+	
+	public int[] getDoctorColor() {
+		return color;
+	}
 }

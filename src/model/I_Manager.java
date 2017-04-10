@@ -1,4 +1,4 @@
-package model;
+package Model;
 
 public interface I_Manager {
 	boolean add(Object element);
