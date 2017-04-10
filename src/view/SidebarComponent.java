@@ -1,3 +1,5 @@
+package view;
+
 import java.util.*;
 import java.awt.*;
 import javax.swing.*;
@@ -213,7 +215,7 @@ public class SidebarComponent implements ComponentMaker
 		free.setForeground(grey);
 		free.setVisible(true);
 		free.setFont(subFont);
-		free.setIcon(new ImageIcon("images/checkBox.png"));
+		free.setIcon(new ImageIcon("resources/checkBox.png"));
 		free.setOpaque(true);
 	
 		reserved.setBounds(90, 430, 70, 20);
@@ -221,7 +223,7 @@ public class SidebarComponent implements ComponentMaker
 		reserved.setForeground(grey);
 		reserved.setVisible(true);
 		reserved.setFont(subFont);
-		reserved.setIcon(new ImageIcon("images/checkBox.png"));
+		reserved.setIcon(new ImageIcon("resources/checkBox.png"));
 		reserved.setOpaque(true);
 
 		single.setBounds(20, 320, 70, 20);
@@ -229,8 +231,8 @@ public class SidebarComponent implements ComponentMaker
 		single.setForeground(grey);
 		single.setVisible(true);
 		single.setFont(subFont);
-		single.setIcon(new ImageIcon("images/checkBox.png"));
-		single.setSelectedIcon(new ImageIcon("images/selectedCheckBox.png"));
+		single.setIcon(new ImageIcon("resources/checkBox.png"));
+		single.setSelectedIcon(new ImageIcon("resources/selectedCheckBox.png"));
 		single.setOpaque(true);
 		single.addActionListener(new filter_action());
 
@@ -239,8 +241,8 @@ public class SidebarComponent implements ComponentMaker
 		recurring.setForeground(grey);
 		recurring.setVisible(true);
 		recurring.setFont(subFont);
-		recurring.setIcon(new ImageIcon("images/checkBox.png"));
-		recurring.setSelectedIcon(new ImageIcon("images/selectedCheckBox.png"));
+		recurring.setIcon(new ImageIcon("resources/checkBox.png"));
+		recurring.setSelectedIcon(new ImageIcon("resources/selectedCheckBox.png"));
 		recurring.setOpaque(true);
 		recurring.addActionListener(new filter_action());
 	}
@@ -438,7 +440,7 @@ public class SidebarComponent implements ComponentMaker
 
 	public JCheckBox createCheckBox(String content)
 	{
-		return new JCheckBox(content, new ImageIcon("images/checkBox.png"));
+		return new JCheckBox(content, new ImageIcon("resources/checkBox.png"));
 	}
 
 	public JRadioButton createRadio(String content)

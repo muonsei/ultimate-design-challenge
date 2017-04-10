@@ -109,6 +109,14 @@ public class MenuComponent implements ComponentMaker
 		agendaButton.setOpaque(true);
 	}
 
+	class notif_action implements ActionListener
+	{
+		public void actionPerformed(ActionEvent e)
+		{
+			notificationsButton.setIcon(new ImageIcon("resources/notifications-inactive.png"));
+		}
+	}
+
 	public void setLabels(String name)
 	{
 		nameLabel = createLabel("Dr. " + name);
@@ -122,7 +130,6 @@ public class MenuComponent implements ComponentMaker
 		year = localdate.getYear();
 
 		dateLabel = createLabel(month + " " + Integer.toString(day) + ", " + Integer.toString(year));
-		dateLabel.setBounds(363, 11, 90, 31);
 		dateLabel.setBounds(355, 11, 150, 31);
 		dateLabel.setFont(mainFont);
 		dateLabel.setForeground(white);
