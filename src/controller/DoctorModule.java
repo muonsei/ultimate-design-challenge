@@ -5,7 +5,6 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.*;
-
 import model.Doctor;
 import model.DoctorFetcher;
 import java.awt.event.*;
@@ -19,10 +18,9 @@ import view.ComponentMaker;
 
 public class DoctorModule implements ObserverModule
 {
-	public DoctorModule(char mode, int id)
+	public DoctorModule(char mode, Doctor doctor)
 	{
-		df = new DoctorFetcher();
-		doctor = df.getByID(id);
+		this.doctor = doctor;
 		green = new Color(24, 200, 148);
 		darkGreen = new Color(29, 168, 122);
 		lightGreen = new Color(157, 249, 212);
@@ -44,6 +42,32 @@ public class DoctorModule implements ObserverModule
 		addCalendarActions();
 
 		combineAll();
+
+		SidebarComponent sidebarTemp = (SidebarComponent)sidebar;
+		CalendarComponent calendarTemp = (CalendarComponent)calendar;
+		MenuComponent menuTemp = (MenuComponent)menu;
+		sidebarTemp.calendarTable.addMouseListener(new MouseAdapter()
+        {
+            public void mouseClicked(MouseEvent evt)
+            {
+            	int col = sidebarTemp.calendarTable.getSelectedColumn();
+	            int row = sidebarTemp.calendarTable.getSelectedRow();
+	            
+            	if(sidebarTemp.calendarTable.getModel().getValueAt(row, col) != null)
+            	{
+            		String selectedDay = sidebarTemp.calendarTable.getModel().getValueAt(row, col).toString();
+            		String[] months =  {"January", "February", "March", "April", "May", "June", "July",
+							"August", "September", "October", "November", "December"};
+
+					String[] days = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+
+            		menuTemp.dateLabel.setText(months[sidebarTemp.monthToday].toUpperCase() + " " + selectedDay + ", " +
+            			Integer.toString(sidebarTemp.yearToday));
+
+            		calendarTemp.dayField.setText(days[col].toUpperCase());
+	            }
+            }
+        });
 	}
 
 	public void combineAll()
@@ -96,6 +120,7 @@ public class DoctorModule implements ObserverModule
 	public void updateDetails()
 	{
 		/* logic for the updates */
+		/* to be done by MJ/Mariel */
 	}
 
 	/* Action Listener for top menu */
@@ -135,7 +160,6 @@ public class DoctorModule implements ObserverModule
 		}
 	}
 
-	/* For calendar and agenda */
 	class form_action implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
@@ -174,7 +198,7 @@ public class DoctorModule implements ObserverModule
 
 			/*
 				Insert these things into the database.
-				Then return the specific doctor
+				Then return new things
 			*/
 		}
 	}
@@ -196,11 +220,13 @@ public class DoctorModule implements ObserverModule
 			if(temp.free.isSelected() == true)
 			{
 				/* free schedules */
+				temp.free.setSelectedIcon(new ImageIcon("images/selectedCheckBox.png"));
 			}
 
 			if(temp.reserved.isSelected() == true)
 			{
 				/* reserved schedules */
+				temp.reserved.setSelectedIcon(new ImageIcon("images/selectedCheckBox.png"));
 			}
 		}
 	}
@@ -218,6 +244,4 @@ public class DoctorModule implements ObserverModule
 	private Color white;
 	private Color grey;
 	private Color lightGrey;
-	
-	private DoctorFetcher df;
 }
