@@ -187,12 +187,21 @@ public class ClientModule implements ObserverModule
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			String scheduleName = sidebar.getInformation('e');
 			String year = sidebar.getInformation('y');
 			String month = sidebar.getInformation('m');
 			String day = sidebar.getInformation('d');
 			String fromTime = sidebar.getInformation('f');
 			String toTime = sidebar.getInformation('t');
+			String specificDay = "M";
+
+			SidebarComponent sidebarTemp = (SidebarComponent)sidebar;
+			sidebarTemp.refreshCalendar(Integer.parseInt(month) - 1, Integer.parseInt(year));
+			String[] headers = {"S", "M", "T", "W", "H", "F", "S"};
+			for(int i = 0; i < 6; i++)
+				for(int j = 0; j < 7; j++)
+					if(sidebarTemp.calendarTable.getModel().getValueAt(i, j) != null &&
+						sidebarTemp.calendarTable.getModel().getValueAt(i, j).toString().compareTo(day) == 0)
+						specificDay = headers[j];
 
 			/*
 				Insert these things into the database.
