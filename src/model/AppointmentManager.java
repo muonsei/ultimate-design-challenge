@@ -14,18 +14,19 @@ private static DBConnection connection;
 	
 	public boolean add(Object a)
 	{
-		String query = "INSERT INTO appointment (appointment_id,client_id,Doctor_id,time,date) VALUES(?,?,?,?,?)";
+		//date and time base ng doctor id
+		String query = "INSERT INTO appointment (client_id,doctor_id,to_time,from_time,date) VALUES(?,?,?,?)";
 		PreparedStatement statement;
+		DoctorFetcher df = new DoctorFetcher();
+		ClientFetcher cf = new ClientFetcher();
 		
 		try{
 			statement = (PreparedStatement) connection.getConnection().prepareStatement(query);
-			statement.setString(1, "11");
-			statement.setString(2, "22");
-			statement.setString(3, "33");
-			statement.setString(4, "330");
-			statement.setString(5, "530");
-			//Replace above statement.setString(1, d.getdoctorName);
-			
+			statement.setInt(1, cf.getByExactName(((Appointment)a).getClientName()).getClientID());
+			//statement.setInt(2, df.);
+			statement.setString(3, ((Appointment)a).getToTime());
+			statement.setString(4, ((Appointment)a).getFromTime());
+			statement.setString(5, ((Appointment)a).getDate());
 			
 			statement.execute();
 			connection.close();
@@ -39,18 +40,15 @@ private static DBConnection connection;
 	public boolean remove(Object a)
 	{
 		
-		String query = "DELETE FROM appointment WHERE appointment_id = ? AND client_id = ? AND doctor_id = ? AND time = ? AND date = ?;";
+		String query = "DELETE FROM appointment WHERE appointment_id = ?";
 		PreparedStatement statement;
+		ClientFetcher cf = new ClientFetcher();
+		AppointmentFetcher af = new AppointmentFetcher();
 		
 		try{
 			statement = (PreparedStatement) connection.getConnection().prepareStatement(query);
-			statement.setString(1, "11");
-			statement.setString(2, "22");
-			statement.setString(3, "33");
-			statement.setString(4, "330");
-			statement.setString(5, "530");
-			//Replace above statement.setString(1, d.getdoctorName);
-			
+			statement.setInt(1, af.getAppointmentID(((Appointment) a).getToTime(), ((Appointment) a).getFromTime(), 
+					((Appointment) a).getDate()));
 			
 			statement.execute();
 			connection.close();
@@ -65,21 +63,17 @@ private static DBConnection connection;
 	public boolean modifyAppointment(Appointment a)
 	{
 		
-		String query = "UPDATE appointment SET time = ?, date = ? WHERE appointment_id = ? AND client_id = ? AND doctor_id = ? AND time = ? AND date = ?;";
+		String query = "UPDATE appointment SET from_time = ?,to_time = ?, date = ? WHERE appointment_id = ?;";
 		PreparedStatement statement;
+		AppointmentFetcher af = new AppointmentFetcher();
 		
 		try{
 			statement = (PreparedStatement) connection.getConnection().prepareStatement(query);
-			statement.setString(1, "630");
-			//Replace above statement.setString(1, d.getdoctorName);
-			statement.setString(2, "700");
-			//Replace above "new name";
-			statement.setString(3, "11");
-			statement.setString(4, "22");
-			statement.setString(5, "33");
-			statement.setString(6, "630");
-			statement.setString(7, "530");
-				
+			statement.setString(1, a.getFromTime());
+			statement.setString(2, a.getToTime());
+			statement.setString(3, a.getDate());
+			statement.setInt(4,  af.getAppointmentID(((Appointment) a).getToTime(), ((Appointment) a).getFromTime(), 
+					((Appointment) a).getDate()));
 			statement.execute();
 			connection.close();
 		}catch (SQLException e) {

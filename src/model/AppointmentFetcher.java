@@ -134,6 +134,27 @@ public class AppointmentFetcher implements I_Fetcher {
 		return appointmentList;
 	}
 	
+	public int getAppointmentID(String to_time, String from_time, String date) {
+		int appointID=0;
+		
+		try {
+			ResultSet rs;
+			String query = "SELECT appointment.appointment_id FROM appointment WHERE appointment.to_time = " + to_time
+					+ "AND appointment.from_time = " + from_time + "AND appointment.date = " + date + " ORDER BY appointment.appointment_id";
+			
+			Statement stment = connection.getConnection().createStatement();
+			rs = stment.executeQuery(query);
+			
+			while (rs.next()) {
+				appointID = rs.getInt("appointment_id");
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return appointID;
+	}
+	
 	public ArrayList<Appointment> getByClientID(int clientID) {
 		ArrayList<Appointment> appointmentList = new ArrayList<Appointment>();
 		
@@ -156,10 +177,9 @@ public class AppointmentFetcher implements I_Fetcher {
 		return appointmentList;
 	}
 	
-	
 	@Override
 	public Appointment toObject(ResultSet rs) throws SQLException {
-		Appointment appointment = new Appointment(rs.getString("appointment_date"),rs.getString("appointment_time"));
+		Appointment appointment = new Appointment(rs.getString("appointment_date"),rs.getString("appointment_from_time"),rs.getString("appointment_to_time"),rs.getString("appointment_clientname"));
 		return appointment;
 	}
 }
