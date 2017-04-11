@@ -55,6 +55,8 @@ public class DoctorModule implements ObserverModule
 	            
             	if(sidebarTemp.calendarTable.getModel().getValueAt(row, col) != null)
             	{
+            		clickedRow = row;
+            		clickeColumn = col;
             		String selectedDay = sidebarTemp.calendarTable.getModel().getValueAt(row, col).toString();
             		String[] months =  {"January", "February", "March", "April", "May", "June", "July",
 							"August", "September", "October", "November", "December"};
@@ -65,6 +67,16 @@ public class DoctorModule implements ObserverModule
             			Integer.toString(sidebarTemp.yearToday));
 
             		calendarTemp.dayField.setText(days[col].toUpperCase());
+
+            		/*
+            		Parameter data type: ArrayList<Doctor> doctors, ArrayList<Appointment>, ArrayList<Schedule>, Doctor
+            		calendar.updateDetails(doctors, appointment, schedule, person);
+            		agenda.updateDetails(doctors, appointment, schedule, person);
+
+            		How to fetch data from ArrayList
+            		appointment.get(i).
+            		schedule.get(i).
+            		*/
 	            }
             }
         });
@@ -247,6 +259,8 @@ public class DoctorModule implements ObserverModule
 	private ComponentMaker agenda;
 	private ComponentMaker calendar;
 
+	private int clickedRow = 0;
+	private int clickeColumn = 0;
 	private Color green;
 	private Color darkGreen;
 	private Color lightGreen;
