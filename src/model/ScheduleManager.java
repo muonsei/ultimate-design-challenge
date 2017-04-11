@@ -15,17 +15,16 @@ public class ScheduleManager implements I_Manager{
 	
 	public boolean add(Object s)
 	{
-		String query = "INSERT INTO schedule (doctor_id,schedule_name,day,from_time,to_time) VALUES(?,?,?)";
+		String query = "INSERT INTO schedule (doctor_id,day,from_time,to_time) VALUES(?,?,?,?)";
 		PreparedStatement statement;
 		DoctorFetcher df = new DoctorFetcher();
 		
 		try{
 			statement = (PreparedStatement) connection.getConnection().prepareStatement(query);
 			statement.setInt(1, df.getByExactName(((Schedule) s).getDoctorname()).getDoctorID());
-			statement.setString(2, ((Schedule) s).getSchedname());
-			statement.setString(3, String.valueOf(((Schedule) s).getDay()));
-			statement.setString(4, ((Schedule) s).getStarttime());
-			statement.setString(5, ((Schedule) s).getEndtime());
+			statement.setString(2, String.valueOf(((Schedule) s).getDay()));
+			statement.setString(3, ((Schedule) s).getStarttime());
+			statement.setString(4, ((Schedule) s).getEndtime());
 			
 			
 			statement.execute();
@@ -63,7 +62,7 @@ public class ScheduleManager implements I_Manager{
 	public boolean modifySchedule(Schedule s)
 	{
 		
-		String query = "UPDATE schedule SET to_time = ? AND from_time=? AND schedule_name=? WHERE sched_id = ?;";
+		String query = "UPDATE schedule SET to_time = ?, from_time=? WHERE sched_id = ?;";
 		PreparedStatement statement;
 		ScheduleFetcher sf = new ScheduleFetcher();
 		
@@ -71,8 +70,7 @@ public class ScheduleManager implements I_Manager{
 			statement = (PreparedStatement) connection.getConnection().prepareStatement(query);
 			statement.setString(1, s.getEndtime());
 			statement.setString(2, s.getStarttime());
-			statement.setString(3, s.getSchedname());
-			statement.setInt(4, sf.getSchedID(((Schedule) s).getEndtime(), ((Schedule) s).getStarttime(), 
+			statement.setInt(3, sf.getSchedID(((Schedule) s).getEndtime(), ((Schedule) s).getStarttime(), 
 					String.valueOf(((Schedule) s).getDay()).charAt(0)));
 			
 			

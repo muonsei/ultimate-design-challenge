@@ -84,8 +84,7 @@ private DBConnection connection;
 
 	@Override
 	public Schedule toObject(ResultSet rs) throws SQLException {
-		Schedule schedule = new Schedule(rs.getString("schedule_name"), 
-				rs.getString("day").charAt(0), rs.getString("from_time"), rs.getString("to_time"),rs.getString("doctorname"));
+		Schedule schedule = new Schedule(rs.getString("day").charAt(0), rs.getString("from_time"), rs.getString("to_time"),rs.getString("doctorname"));
 		return schedule;
 	}
 }
